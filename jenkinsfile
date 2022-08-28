@@ -6,7 +6,7 @@ pipeline {
             steps {
                 
                 echo "docker"
-                docker ps
+                docker pull jenkins/jenkins
             }
         }
     }
