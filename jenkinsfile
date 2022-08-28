@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('build') {
             steps {
                 
-                echo "docker"
-                sh 'docker pull jenkins/jenkins'
+                echo "build stage"
+                sh 'cd app && docker build -t .'
             }
         }
     }
