@@ -2,7 +2,7 @@
 pipeline {
     agent any
 environment {
-    def kubeConfig="C:\\ProgramData\\Jenkins\\.jenkins\\.kube\\config"
+    def kubeConfig="/Users/mac/.kube/config"
 }
     stages {
         stage('Hello') {
