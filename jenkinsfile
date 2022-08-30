@@ -10,7 +10,6 @@ environment {
                 script{
                     git branch: 'main',
                     url: 'https://github.com/MayarAbdelaziz/jenkins.git'
-                    // withCredentials([string(credentialsId: 'DOCKERPASS', variable: 'DOCKERPASS2')]) {}
                     bat 'cd app && docker build -t mayaaribrahim/jenkinsnodeapp . && docker push mayaaribrahim/jenkinsnodeapp '
                     
                     bat "cd deployment && kubectl apply -f nodejs-ingress.yaml,nodejs.yaml,nodesvc.yaml --kubeconfig=$kubeConfig"
