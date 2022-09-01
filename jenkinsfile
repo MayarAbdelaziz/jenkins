@@ -10,7 +10,7 @@ environment {
         if (uname.startsWith("Darwin")) {
             return "Macos"
         }
-        else if {
+        else {
             return "Linux"
         }
         else {
