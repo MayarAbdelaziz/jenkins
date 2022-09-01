@@ -1,26 +1,8 @@
-
 pipeline {
     agent any
 environment {
     def kubeConfig="/Users/mac/.kube/config"
-    
-    def checkOs(){
-        if (isUnix()) {
-        def uname = sh script: 'uname', returnStdout: true
-        if (uname.startsWith("Darwin")) {
-            return "Macos"
-        }
-        else {
-            return "Linux"
-        }
-        else {
-            return "Windows"
-         }
-       }
-      else {
-        echo 'none found'
-        }
-}
+     
 }
 
 
