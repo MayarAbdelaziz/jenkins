@@ -1,23 +1,52 @@
 pipeline {
     agent any
 environment {
-    def kubeConfig="/Users/mac/.kube/config"
-     
+   // def kubeConfig="/Users/mac/.kube/config"
+    def osname = System.getProperty('os.name')
 }
 
-
-
     stages {
-        stage('Hello') {
+        stage('Build') {
             steps {
                 script{
+                if (osname.startsWith('Windows')){
+                    git branch: 'main',
+                    url: 'https://github.com/MayarAbdelaziz/jenkins.git'
+                    bat 'cd app && /usr/local/bin/docker build -t mayaaribrahim/jenkinsnodeapp . && /usr/local/bin/docker push mayaaribrahim/jenkinsnodeapp '
+                    
+                    bat "cd deployment && /usr/local/bin/kubectl apply -f nodejs-ingress.yaml,nodejs.yaml,nodesvc.yaml --kubeconfig=$kubeConfig"
+                }
+                if (osname.startsWith('Mac')){
+                    git branch: 'main',
+                    url: 'https://github.com/MayarAbdelaziz/jenkins.git'
+                    sh 'cd app && /usr/local/bin/docker build -t mayaaribrahim/jenkinsnodeapp . && /usr/local/bin/docker push mayaaribrahim/jenkinsnodeapp '
+                    
+                    // sh "cd deployment && /usr/local/bin/kubectl apply -f nodejs-ingress.yaml,nodejs.yaml,nodesvc.yaml"
+                }
+                if (osname.startsWith('Linux')){
                     git branch: 'main',
                     url: 'https://github.com/MayarAbdelaziz/jenkins.git'
                     sh 'cd app && /usr/local/bin/docker build -t mayaaribrahim/jenkinsnodeapp . && /usr/local/bin/docker push mayaaribrahim/jenkinsnodeapp '
                     
                     sh "cd deployment && /usr/local/bin/kubectl apply -f nodejs-ingress.yaml,nodejs.yaml,nodesvc.yaml --kubeconfig=$kubeConfig"
                 }
+                
+                    
+                }
             }
+        }
+        stage('deploy'){
+            steps{
+                script{
+                    if (osname.startsWith('Mac')){
+                    
+                    sh "cd deployment && /usr/local/bin/kubectl apply -f nodejs-ingress.yaml,nodejs.yaml,nodesvc.yaml --kubeconfig=$kubeConfig"
+                }
+                }
+            }
+            
         }
     }
 }
+
+
