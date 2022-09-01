@@ -3,6 +3,8 @@ pipeline {
     agent any
 environment {
     def kubeConfig="/Users/mac/.kube/config"
+    }
+environment {
     def checkOs(){
         if (isUnix()) {
         def uname = sh script: 'uname', returnStdout: true
@@ -18,6 +20,10 @@ environment {
     }
 }
 }
+}
+
+
+
     stages {
         stage('Hello') {
             steps {
