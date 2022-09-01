@@ -40,7 +40,7 @@ environment {
                 script{
                     if (osname.startsWith('Mac')){
                     
-                    sh "cd deployment && /usr/local/bin/kubectl apply -f nodejs-ingress.yaml,nodejs.yaml,nodesvc.yaml --kubeconfig=$kubeConfig"
+                    sh "cd deployment && /usr/local/bin/kubectl apply -f nodejs-ingress.yaml,nodejs.yaml,nodesvc.yaml"
                 }
                 }
             }
