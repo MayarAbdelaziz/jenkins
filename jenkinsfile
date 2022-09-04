@@ -34,7 +34,7 @@ environment {
     }
 }
 def checkos(name){
-    echo "os ${name}"
+    echo "${name}"
 }
 node {
     stage ('os') {
