@@ -23,7 +23,6 @@ environment {
             steps{
                 script{
                     if (osname.startsWith('Mac')){
-  
                     sh "cd deployment && /usr/local/bin/kubectl apply -f nodejs-ingress.yaml,nodejs.yaml,nodesvc.yaml"
                 }
                 }
@@ -41,8 +40,7 @@ node {
         script{
             git branch: 'main',
                     url: 'https://github.com/MayarAbdelaziz/jenkins.git'
-                    sh 'cd app && /usr/local/bin/docker build -t mayaaribrahim/jenkinsnodeapp . && /usr/local/bin/docker push mayaaribrahim/jenkinsnodeapp '
-                    
+                    sh 'cd app && /usr/local/bin/docker build -t mayaaribrahim/jenkinsnodeapp . && /usr/local/bin/docker push mayaaribrahim/jenkinsnodeapp  
                     sh "cd deployment && /usr/local/bin/kubectl apply -f nodejs-ingress.yaml,nodejs.yaml,nodesvc.yaml "
         }
        }
